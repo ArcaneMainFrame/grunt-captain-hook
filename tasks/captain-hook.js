@@ -18,7 +18,7 @@ module.exports = function (grunt) {
 
     function processCssIncludes() {
       var cssLink;
-      if (typeof cssFile == 'string') {
+      if (typeof cssFile === 'string') {
         cssLink = '<link rel="stylesheet" type="text/css" href="' + cssFile + '">';
 
         return cssLink;
@@ -37,15 +37,15 @@ module.exports = function (grunt) {
     }
 
     function processJsIncludes() {
-      if (typeof jsFile == 'string') {
-        var jsLinks = '<script src="' + jsFile + '"></script>';
-
+      var jsLinks;
+      if (typeof jsFile === 'string') {
+        jsLinks = '<script src="' + jsFile + '"></script>';
         return jsLinks;
       }
       else {
         var js = jsFile.length;
         var element = null;
-        var jsLinks = [];
+        jsLinks = [];
 
         for (var i = 0; i < js; i++) {
           element = '<script src="' + jsFile[i] + '"></script>';
