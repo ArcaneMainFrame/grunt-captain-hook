@@ -29,7 +29,7 @@ module.exports = function(grunt) {
     },
 
     // Configuration to be run (and then tested).
-    'captain-hook': {
+    captain_hook: {
       development: {
         cssFiles: ['*.css'],
         jsFiles: ['*.js'],
