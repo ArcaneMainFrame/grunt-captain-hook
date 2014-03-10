@@ -22,11 +22,11 @@ var grunt = require('grunt');
     test.ifError(value)
 */
 
-exports.link_html = {
+exports.captain_hook = {
   setUp: function(done) {
     done();
   },
-  link_html: function(test) {
+  captain_hook: function(test) {
     test.expect(2);
     var content = grunt.file.read('test/fixtures/index.html');
     console.log(content);
