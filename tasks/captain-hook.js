@@ -10,7 +10,7 @@
 
 module.exports = function (grunt) {
 
-  grunt.registerMultiTask('captain-hook', 'link css and javascipt in html file', function () {
+  grunt.registerMultiTask('captain_hook', 'link css and javascipt in html file', function () {
 
     var options = this.options({
       cwd: '.'
