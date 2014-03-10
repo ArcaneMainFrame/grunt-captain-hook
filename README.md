@@ -17,14 +17,14 @@ One the plugin has been installed, it may be enabled inside your Gruntfile with 
 grunt.loadNpmTasks('grunt-captain-hook');
 ```
 
-## The "captain-hook" task
+## The "captain_hook" task
 
 ### Overview
 In your project's Gruntfile, add a section named `captain-hook` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
-  captain-hook: {
+  captain_hook: {
     your_target: {
       // Target-specific file lists and/or options go here.
       jsFiles: ['path/to/js/files.js'],
