@@ -1,8 +1,8 @@
 /*
- * grunt-link-html
- * https://github.com/pythonandchips/grunt-link-html
+ * grunt-captain-hook
+ * https://github.com/ArcaneMainFrame/grunt-captain-hook
  *
- * Copyright (c) 2013 Colin Gemmell
+ * Copyright (c) 2014 ArcaneMainFrame
  * Licensed under the MIT license.
  */
 
@@ -16,44 +16,21 @@ module.exports = function (grunt) {
       cwd: '.'
     });
 
-    function processCssIncludes() {
-      var cssLink;
-      if (typeof cssFile === 'string') {
-        cssLink = '<link rel="stylesheet" type="text/css" href="' + cssFile + '">';
+    var includes = function(template, path, options){
+      var cssFiles = grunt.file.expand(options, path);
+      var cssIncludes = cssFiles.map( function(file) {
+      return grunt.template.process(template, {data: {file: file}});
+    });
+      cssIncludes.unshift('');
+      cssIncludes = cssIncludes.join('\n') + '\n';
+      return cssIncludes;
+    };
 
-        return cssLink;
-      }
-      else {
-        var css = cssFile.length;
-        var element = null;
-        var cssLinks = [];
-
-        for (var i = 0; i < css; i++) {
-          element = '<link rel="stylesheet" type="text/css" href="' + cssFile[i] + '">';
-          cssLinks.push(element);
-        }
-        return cssLinks.join('\n');
-      }
-    }
-
-    function processJsIncludes() {
-      var jsLinks;
-      if (typeof jsFile === 'string') {
-        jsLinks = '<script src="' + jsFile + '"></script>';
-        return jsLinks;
-      }
-      else {
-        var js = jsFile.length;
-        var element = null;
-        jsLinks = [];
-
-        for (var i = 0; i < js; i++) {
-          element = '<script src="' + jsFile[i] + '"></script>';
-          jsLinks.push(element);
-        }
-        return jsLinks.join('\n');
-      }
-    }
+    var cssFile = grunt.file.expand(options, this.data.cssFiles);
+    var jsFile = grunt.file.expand(options, this.data.jsFiles);
+     var cssIncludes = includes('<link rel="stylesheet" type="text/css" href="<%= file %>">', this.data.cssFiles, options);
+    var jsIncludes = includes('<script src="<%= file %>"></script>', this.data.jsFiles, options);
+    var targetFiles = grunt.file.expand(options, this.data.targetHtml);
 
     var processIncludes = function (filepath, content, fileType, files) {
       var begin = content.html.match(new RegExp('<!--\\s*begin:' + fileType + '\\s*-->'));
@@ -68,12 +45,6 @@ module.exports = function (grunt) {
       }
       return skip;
     };
-    var cssFile = this.data.cssFiles;
-    var jsFile = this.data.jsFiles;
-    var cssIncludes = processCssIncludes();
-    var jsIncludes = processJsIncludes();
-    var targetFiles = grunt.file.expand(options, this.data.targetHtml);
-
 
     targetFiles.forEach(function (filepath) {
       var content = { html: grunt.file.read(options.cwd + '/' + filepath) };
