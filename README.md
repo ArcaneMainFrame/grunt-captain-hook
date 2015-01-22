@@ -82,6 +82,12 @@ Default value: `.`
 
 Path to where to reference all files from (maybe be used for a CDN later).
 
+#### options.nonull
+Type: `Boolean`
+Default value: `true`
+
+Will return a file path even if it doesn't exist locally. Especially helpful for external links.
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 

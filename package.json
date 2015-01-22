@@ -1,6 +1,6 @@
 {
   "name": "grunt-captain-hook",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Change css and js links within a html file",
   "main": "Gruntfile.js",
   "directories": {
